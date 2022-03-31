@@ -34,16 +34,12 @@ namespace Minesweeper.Scenes
 
 		public static Scene GetScenefromID(ContentManager content, SpriteBatch spriteBatch, SceneID sceneID)
         {
-            switch (sceneID)
+            return sceneID switch
             {
-                case SceneID.MakeBoard:
-					return new TitleScreen(content, spriteBatch);
-				case SceneID.Board:
-					return new TitleScreen(content, spriteBatch);
-				case SceneID.Title:
-                default:
-                    return new TitleScreen(content, spriteBatch);
-            }
+                SceneID.MakeBoard => new TitleScreen(content, spriteBatch),
+                SceneID.Board => new TitleScreen(content, spriteBatch),
+                _ => new TitleScreen(content, spriteBatch),
+            };
         }
     }
 }
