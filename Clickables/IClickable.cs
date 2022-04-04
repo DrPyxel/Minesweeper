@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Minesweeper.Clickables
 {
-    class IClickable
+    public abstract class IClickable
     {
         public bool canBeClicked;
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Minesweeper.Clickables;
 using Minesweeper.Helpers;
 using Minesweeper.Scenes;
 
@@ -19,7 +20,6 @@ namespace Minesweeper
 
         private SceneManager sceneManager;
         private GameBoardManager gameBoard;
-
 
         public Game1()
         {
@@ -63,7 +63,7 @@ namespace Minesweeper
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            sceneManager.GetCurrentScene().Draw(_spriteBatch);
+            sceneManager.Draw(_spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
         }

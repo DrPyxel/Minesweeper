@@ -6,6 +6,8 @@ using Android.Views;
 using Android.Widget;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +15,11 @@ using System.Text;
 
 namespace Minesweeper.Clickables
 {
-    class IButton : IClickable
+    public abstract class IButton : IClickable
     {
-        public Vector2 Position;
         public Rectangle BoundingBox;
-        public IButton(Vector2 position, Rectangle bb, bool clickable = false)
+        public IButton(Rectangle bb, bool clickable = false)
         {
-            Position = position;
             BoundingBox = bb;
             canBeClicked = clickable;
         }
@@ -29,7 +29,13 @@ namespace Minesweeper.Clickables
                 return true;
             return false;
         }
-
+        
+        public virtual void Update()
+        {
+            //if (CheckCollision())
+            OnClick();
+        }
+        
         public virtual void Draw(SpriteBatch spritebatch)
         {
             
