@@ -12,17 +12,19 @@ namespace Minesweeper.Scenes
         GillSansText titleText;
         TransitionButton transitionButton;
 
-        public TitleScreen(SceneManager sceneManager, ContentManager content, SpriteBatch spriteBatch)
+        public TitleScreen(SceneManager sceneManager, ContentManager content, SpriteBatch spritebatch)
         {
             Rectangle buttonBoundingBox = new Rectangle((int)Game1.ScreenCenter.X, (int)Game1.ScreenCenter.Y, 100, 100);
-            titleText = new GillSansText(content, spriteBatch);
+            _spriteBatch = spritebatch;
+            titleText = new GillSansText(content, _spriteBatch);
             transitionButton = new TransitionButton(sceneManager, buttonBoundingBox, this);
-            sceneManager.AddButton(transitionButton);
+            
         }
 
         public override void Draw(SpriteBatch spritebatch)
         {
-            titleText.Draw(spritebatch, "Minesweeper", Game1.ScreenCenter, Color.White, 5f, true);
+            titleText.Draw(_spriteBatch, "Minesweeper", Game1.ScreenCenter, Color.White, 5f, true);
+            transitionButton.Draw(spritebatch);
             base.Draw(spritebatch);
         }
     }

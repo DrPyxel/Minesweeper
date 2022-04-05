@@ -26,7 +26,7 @@ namespace Minesweeper.Helpers
 
         public SpriteUtils(GraphicsDevice graphicsDevice) : base(graphicsDevice)
         {
-            this.WhiteTexture = new Texture2D(this.GraphicsDevice, 1, 1);
+            this.WhiteTexture = new Texture2D(graphicsDevice, 1, 1);
             this.WhiteTexture.SetData(new Color[] { Color.White });
         }
 

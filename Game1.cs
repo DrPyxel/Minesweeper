@@ -33,6 +33,7 @@ namespace Minesweeper
             // TODO: Add your initialization logic here
             ScreenCenter = new Vector2(GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2f, GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2f);
             sceneManager = new SceneManager(Content, _spriteBatch);
+            sceneManager.SetScene(Content, _spriteBatch, SceneID.Title);
             base.Initialize();
         }
 

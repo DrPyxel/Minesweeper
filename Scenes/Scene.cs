@@ -4,7 +4,7 @@ namespace Minesweeper.Scenes
 {
     public abstract class Scene
     {
-        SpriteBatch spriteBatch;
+        public SpriteBatch _spriteBatch;
 
         public Scene()
         {

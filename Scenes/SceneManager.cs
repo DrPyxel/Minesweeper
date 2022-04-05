@@ -12,9 +12,7 @@ namespace Minesweeper.Scenes
 
 		public SceneManager(ContentManager content, SpriteBatch spriteBatch, SceneID sceneID = SceneID.Title)
 		{
-			Scene scene = GetScenefromID(this, content, spriteBatch, sceneID);
 			buttonManager = new ButtonManager(content, spriteBatch);
-			SetScene(scene);
 		}
 		public void Draw(SpriteBatch spritebatch)
         {
