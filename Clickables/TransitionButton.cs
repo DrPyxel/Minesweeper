@@ -37,7 +37,9 @@ namespace Minesweeper.Clickables
         public override void Draw(SpriteBatch spritebatch)
         {
             SpriteUtils spriteUtil = new SpriteUtils(spritebatch.GraphicsDevice);
+            spriteUtil.Begin();
             spriteUtil.FillRectangle(BoundingBox, Color.White);
+            spriteUtil.End();
             base.Draw(spritebatch);
         }
     }

@@ -38,6 +38,11 @@ namespace Minesweeper.Scenes
 			return currentScene;
 		}
 
+		public Scene SetScene(Scene scene)
+		{
+			currentScene = scene;
+			return currentScene;
+		}
 		public Scene SetScene(ContentManager content, SpriteBatch spriteBatch, SceneID sceneID)
 		{
 			Scene nextScene = GetScenefromID(this, content, spriteBatch, sceneID);
@@ -45,11 +50,6 @@ namespace Minesweeper.Scenes
 			return currentScene;
 		}
 
-		public Scene SetScene(Scene scene)
-		{
-			currentScene = scene;
-			return currentScene;
-		}
 
 		public static Scene GetScenefromID(SceneManager sceneManager, ContentManager content, SpriteBatch spriteBatch, SceneID sceneID)
         {
