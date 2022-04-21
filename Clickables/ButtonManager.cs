@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -26,12 +27,16 @@ namespace Minesweeper.Clickables
             Spritebatch = spriteBatch;
         }
 
-        public void Update()
+        public void Update(Vector2 clickpos)
         {
-            foreach(IButton button in buttons)
+            try
             {
-                button.Update();
+                foreach(IButton button in buttons)
+                {
+                    button.Update(clickpos);
+                }
             }
+            catch { }
         }
 
         public void DrawButtons()
@@ -51,6 +56,11 @@ namespace Minesweeper.Clickables
         public bool RemoveButton(IButton button)
         {
             return buttons.Remove(button);
+        }
+
+        public void Clear()
+        {
+            buttons.Clear();
         }
     }
 }

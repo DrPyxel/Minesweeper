@@ -18,27 +18,41 @@ namespace Minesweeper.Clickables
 {
     public class TransitionButton : IButton
     {
+        const int BUTTON_WIDTH = 350;
+        const int BUTTON_HEIGHT = 150;
         SceneManager _sceneManager;
         Scene _targetScene;
-        public TransitionButton(SceneManager sceneManager, Rectangle bb, Scene targetScene, bool clickable = true) : base(bb, clickable)
+        Color color;
+
+        public TransitionButton(Scene targetScene, SceneManager sceneManager, Vector2 location, bool clickable = true)
         {
-            BoundingBox = bb;
+            Rectangle buttonBoundingBox = new Rectangle((int)(Game1.ScreenCenter.X - BUTTON_WIDTH / 2 + location.X), (int)(Game1.ScreenCenter.Y - BUTTON_HEIGHT / 2 + location.Y), BUTTON_WIDTH, BUTTON_HEIGHT);
+            BoundingBox = buttonBoundingBox;
             canBeClicked = clickable;
 
-            _sceneManager = sceneManager;
             _targetScene = targetScene;
+            _sceneManager = sceneManager;
+
+            color = Color.White;
         }
-        public override void ClickEvent()
+
+        public override void OnClick()
         {
             _sceneManager.SetScene(_targetScene);
             canBeClicked = false;
+            base.OnClick();
+        }
+
+        public override void Update(Vector2 clickpos)
+        {
+            base.Update(clickpos);
         }
 
         public override void Draw(SpriteBatch spritebatch)
         {
             SpriteUtils spriteUtil = new SpriteUtils(spritebatch.GraphicsDevice);
             spriteUtil.Begin();
-            spriteUtil.FillRectangle(BoundingBox, Color.White);
+            spriteUtil.FillRectangle(BoundingBox, color);
             spriteUtil.End();
             base.Draw(spritebatch);
         }

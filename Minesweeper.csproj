@@ -58,11 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
+    <Compile Include="Clickables\BoardSizeButton.cs" />
     <Compile Include="Clickables\ButtonManager.cs" />
     <Compile Include="Clickables\IButton.cs" />
     <Compile Include="GameBoardManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Helpers\GillSansText.cs" />
+    <Compile Include="Scenes\MakeBoardScreen.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\Scene.cs" />

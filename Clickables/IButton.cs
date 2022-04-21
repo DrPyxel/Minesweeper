@@ -19,7 +19,7 @@ namespace Minesweeper.Clickables
         public Rectangle BoundingBox;
 
 
-        public IButton(Rectangle bb, bool clickable = true)
+        public IButton(Rectangle bb = default(Rectangle), bool clickable = true)
         {
             BoundingBox = bb;
             canBeClicked = clickable;
@@ -32,21 +32,13 @@ namespace Minesweeper.Clickables
             return false;
         }
 
-        public virtual void Update()
+        public virtual void Update(Vector2 clickpos)
         {
-            //if (CheckCollision())
-            OnClick();
+            if (CheckCollision(clickpos))
+                OnClick();
         }
 
-        public bool OnClick()
-        {
-            if (!canBeClicked)
-                return false;
-            ClickEvent();
-            return true;
-        }
-
-        public virtual void ClickEvent()
+        public virtual void OnClick()
         {
 
         }
