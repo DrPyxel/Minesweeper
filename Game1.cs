@@ -16,17 +16,16 @@ namespace Minesweeper
     {
         public static Vector2 ScreenCenter;
 
-        Texture2D bombTexture;
-        Texture2D tileTexture;
-        Texture2D tileBackTexture;
+        public static Texture2D bombTexture;
+        public static Texture2D tileTexture;
+        public static Texture2D tileBackTexture;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spritebatch;
 
         private SceneManager _sceneManager;
         private TitleScreen _titleScreen;
         private MakeBoardScreen _makeBoardScreen;
-        private GameBoardManager gameBoard;
-
+        private BoardScreen _gameScreen;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -50,9 +49,9 @@ namespace Minesweeper
             tileTexture = Content.Load<Texture2D>("tile");
             tileBackTexture = Content.Load<Texture2D>("blank");
             _sceneManager = new SceneManager(Content, _spritebatch);
-            _makeBoardScreen = new MakeBoardScreen(Content, _spritebatch);
+            _gameScreen = new BoardScreen(Content, _spritebatch, null);
+            _makeBoardScreen = new MakeBoardScreen(Content, _spritebatch, _sceneManager, _gameScreen);
             _titleScreen = new TitleScreen(Content, _spritebatch, _sceneManager, _makeBoardScreen);
-
             _sceneManager.SetScene(_titleScreen);
             //_sceneManager.GetCurrentScene().Load();
         }
@@ -68,7 +67,7 @@ namespace Minesweeper
             if (touchCollection.Count > 0)
             {
                 //Only Fire Select Once it's been released
-                if (touchCollection[0].State == TouchLocationState.Moved || touchCollection[0].State == TouchLocationState.Pressed)
+                if (touchCollection[0].State == TouchLocationState.Pressed)
                 {
                     clickPos = touchCollection[0].Position;
                 }

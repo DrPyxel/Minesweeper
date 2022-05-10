@@ -60,8 +60,13 @@
     <Compile Include="Activity1.cs" />
     <Compile Include="Clickables\BoardSizeButton.cs" />
     <Compile Include="Clickables\ButtonManager.cs" />
+    <Compile Include="Clickables\DigButton.cs" />
     <Compile Include="Clickables\IButton.cs" />
+    <Compile Include="Clickables\MakeBoardButton.cs" />
+    <Compile Include="Clickables\CursorMode.cs" />
+    <Compile Include="Clickables\FlagButton.cs" />
     <Compile Include="GameBoardManager.cs" />
+    <Compile Include="Scenes\BoardScreen.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Helpers\GillSansText.cs" />
     <Compile Include="Scenes\MakeBoardScreen.cs" />

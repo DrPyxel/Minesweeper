@@ -43,11 +43,6 @@ namespace Minesweeper.Clickables
             base.OnClick();
         }
 
-        public override void Update(Vector2 clickpos)
-        {
-            base.Update(clickpos);
-        }
-
         public override void Draw(SpriteBatch spritebatch)
         {
             SpriteUtils spriteUtil = new SpriteUtils(spritebatch.GraphicsDevice);
