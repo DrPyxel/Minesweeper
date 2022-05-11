@@ -9,15 +9,23 @@ namespace Minesweeper
         private int numMines;
         private int boardWidth;
         private int boardHeight;
-        Tile[,] tiles = new Tile[0, 0];
+        Tile[,] _tiles = new Tile[0, 0];
+        Texture2D _tileBackTexture, _tileFrontTexture, _mineFrontTexture;
 
-        public GameBoardManager(int width, int height)
+        public GameBoardManager(Texture2D tileBackTexture, Texture2D tileFrontTexture, Texture2D mineFrontTexture)
+        {
+            _tileBackTexture = tileBackTexture;
+            _tileFrontTexture = tileFrontTexture;
+            _mineFrontTexture = mineFrontTexture;
+            GameBoardManager(3, 3);
+        }
+
+        public GameBoardManager(int width, int height, List<Tile> tiles)
         {
             boardWidth = width;
             boardHeight = height;
-            tiles = new Tile[width, height];
 
-            Setup();
+            Setup(tiles);
         }
         public int GetWidth()
         {
@@ -28,23 +36,24 @@ namespace Minesweeper
             return boardHeight;
         }
 
-        public void Setup()
+        public void Setup(List<Tile> tiles)
         {
             numMines = boardWidth * boardHeight / 4;
             for (int i = 0; i < boardWidth; i++)
             {
                 for (int j = 0; j < boardHeight; j++)
                 {
-                    float sWidth = Game1.ScreenCenter.X * 2;
-                    float sHeight = Game1.ScreenCenter.Y * 2;
-                    int xdistBetween = (int)sWidth / boardWidth;
-                    int ydistBetween = (int)sHeight / boardHeight;
+                    Tile tile = tiles.get(i + j);
+                    _tiles[i, j] = tile;
                     
-                    int xPos = (int)Game1.ScreenCenter.X + xdistBetween * (i - boardWidth / 2);
-                    int yPos = (int)Game1.ScreenCenter.Y + ydistBetween * (j - boardHeight / 2);
-                    Vector2 position = new Vector2(xPos, yPos);
-                    tiles[i, j] = new Tile(position);
 
+                    //float sWidth = Game1.ScreenCenter.X * 2;
+                    //float sHeight = Game1.ScreenCenter.Y * 2;
+                    //int xdistBetween = (int)sWidth / boardWidth;
+                    //int ydistBetween = (int)sHeight / boardHeight;
+                    //int xPos = (int)Game1.ScreenCenter.X + xdistBetween * (i - boardWidth / 2);
+                    //int yPos = (int)Game1.ScreenCenter.Y + ydistBetween * (j - boardHeight / 2);
+                    //Vector2 position = new Vector2(xPos, yPos);
                 }
             }
         }

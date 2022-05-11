@@ -29,6 +29,7 @@ namespace Minesweeper
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.SupportedOrientations = DisplayOrientation.Portrait;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -36,7 +37,7 @@ namespace Minesweeper
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            ScreenCenter = new Vector2(GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2f, GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2f);
+            ScreenCenter = new Vector2(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f);
             base.Initialize();
         }
 
