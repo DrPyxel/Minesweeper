@@ -20,18 +20,16 @@ namespace Minesweeper.Clickables
         GillSansText gillSansText;
         const int BUTTON_WIDTH = 250;
         const int BUTTON_HEIGHT = 250;
-        public GameBoardManager gameBoardManager;
         MakeBoardScreen makeBoard;
         int value { get; }
         Color color;
 
-        public BoardSizeButton(int value, Vector2 location, GillSansText text, GameBoardManager gameBoard, MakeBoardScreen makeBoardScreen, bool clickable = true)
+        public BoardSizeButton(int value, Vector2 location, GillSansText text, MakeBoardScreen makeBoardScreen, bool clickable = true)
         {
             Rectangle buttonBoundingBox = new Rectangle((int)(Game1.ScreenCenter.X - BUTTON_WIDTH / 2 + location.X), (int)(Game1.ScreenCenter.Y - BUTTON_HEIGHT / 2 + location.Y), BUTTON_WIDTH, BUTTON_HEIGHT);
             BoundingBox = buttonBoundingBox;
             canBeClicked = clickable;
             gillSansText = text;
-            gameBoardManager = gameBoard;
             makeBoard = makeBoardScreen;
             this.value = value;
             color = Color.LightSlateGray;
@@ -39,8 +37,7 @@ namespace Minesweeper.Clickables
 
         public override void OnClick()
         {
-            gameBoardManager = new GameBoardManager(value, value);
-            makeBoard.gameBoardManager = gameBoardManager;
+            makeBoard.SetSize(value, value);
             base.OnClick();
         }
 

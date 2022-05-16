@@ -14,7 +14,7 @@ namespace Minesweeper.Tiles
 		public TileState State { get; }
 
 
-		public Tile(Vector2 location, SpriteBatch frontTexture, SpriteBatch backTexture, bool clickable = true, TileType type = TileType.NoMine, TileState state = TileState.Back)
+		public Tile(Vector2 location, Texture2D frontTexture, Texture2D backTexture, bool clickable = true, TileType type = TileType.NoMine, TileState state = TileState.Back)
 		{
 			Rectangle buttonBoundingBox = new Rectangle((int)(Game1.ScreenCenter.X - BUTTON_WIDTH / 2 + location.X), (int)(Game1.ScreenCenter.Y - BUTTON_HEIGHT / 2 + location.Y), BUTTON_WIDTH, BUTTON_HEIGHT);
 			BoundingBox = buttonBoundingBox;

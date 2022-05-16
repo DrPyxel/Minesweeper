@@ -17,7 +17,7 @@ namespace Minesweeper.Scenes
         CursorMode cursorMode;
         FlagButton flagButton;
         DigButton digButton;
-        List<Tile> tiles = new List<Tile>();
+        Tile[,] tiles = new Tile[0,0];
         public GameBoardManager _gameBoardManager;
 
         public BoardScreen(ContentManager content, SpriteBatch spritebatch, GameBoardManager gameBoardManager) : base(content, spritebatch)
@@ -40,17 +40,7 @@ namespace Minesweeper.Scenes
         {
             int boardWidth = _gameBoardManager.GetWidth();
             int boardHeight = _gameBoardManager.GetHeight();
-            for (int column = 0; column < boardWidth; column++)
-            {
-                for (int row = 0; row < boardWidth; row++)
-                {
-                    int xFactor = row - boardWidth / 2;
-                    int yFactor = column - boardHeight / 2;
-                    Vector2 buttonPos = new Vector2(275 * xFactor, 275 * yFactor);
-                    Tile tile = new Tile(buttonPos);
-                    tiles.Add(tile);
-                }
-            }
+            tiles = _gameBoardManager._tiles;
 
             foreach (Tile tile in tiles)
             {
