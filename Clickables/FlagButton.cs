@@ -22,7 +22,7 @@ namespace Minesweeper
         const int BUTTON_WIDTH = 250;
         const int BUTTON_HEIGHT = 250;
         BoardScreen _gameBoard;
-
+        Color color;
         public FlagButton(Vector2 location, GillSansText text, BoardScreen gameBoard, bool clickable = true)
         {
             Rectangle buttonBoundingBox = new Rectangle((int)(Game1.ScreenCenter.X - BUTTON_WIDTH / 2 + location.X), (int)(Game1.ScreenCenter.Y - BUTTON_HEIGHT / 2 + location.Y), BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -30,6 +30,7 @@ namespace Minesweeper
             canBeClicked = clickable;
             gillSansText = text;
             _gameBoard = gameBoard;
+            color = Color.Black;
         }
 
         public override void OnClick()
@@ -37,7 +38,7 @@ namespace Minesweeper
             if (canBeClicked)
             {
                 _gameBoard.SetCursorMode(CursorMode.Flagging);
-
+                color = Color.White;
             }
             base.OnClick();
         }
@@ -45,7 +46,7 @@ namespace Minesweeper
         {
             SpriteUtils spriteUtil = new SpriteUtils(spritebatch.GraphicsDevice);
             spriteUtil.Begin();
-            spriteUtil.FillRectangle(BoundingBox, Color.Black);
+            spriteUtil.FillRectangle(BoundingBox, color);
             spriteUtil.End();
 
             base.Draw(spritebatch);

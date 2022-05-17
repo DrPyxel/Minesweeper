@@ -10,7 +10,7 @@ namespace Minesweeper.Tiles
 		const int BUTTON_WIDTH = 50;
 		const int BUTTON_HEIGHT = 50;
 
-		public TileType Type { get; }
+		private TileType Type;
 		public TileState State { get; }
 
 
@@ -45,7 +45,10 @@ namespace Minesweeper.Tiles
 			}
 			base.Draw(spritebatch);
 		}
-
+		public void ChangeTileType(TileType type)
+        {
+			Type = type;
+        }
 		private void DoTileAction(TileType type)
 		{
 			switch (type)

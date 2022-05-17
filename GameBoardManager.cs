@@ -31,6 +31,15 @@ namespace Minesweeper
             numMines = boardWidth * boardHeight / 4;
             _tiles = new Tile[boardWidth, boardHeight];
             _tiles = tiles;
+
+            while(numMines > 0)
+            {
+                int mineX = Math.random() * boardWidth;
+                int mineY = Math.random() * boardHeight;
+
+                _tiles[mineX, mineY].ChangeTileType(TileType.Mine);
+                numMines--;
+            }
         }
 
         public void DrawTiles(SpriteBatch spritebatch)
