@@ -12,7 +12,7 @@ namespace Minesweeper.Tiles
 
 		private TileType Type;
 		public TileState State { get; }
-
+		Texture2D FrontTexture, BackTexture;
 
 		public Tile(Vector2 location, Texture2D frontTexture, Texture2D backTexture, bool clickable = true, TileType type = TileType.NoMine, TileState state = TileState.Back)
 		{
@@ -21,6 +21,8 @@ namespace Minesweeper.Tiles
 
 			Type = type;
 			State = state;
+			FrontTexture = frontTexture;
+			BackTexture = backTexture;
 		}
 
 		public override void OnClick()
@@ -34,15 +36,17 @@ namespace Minesweeper.Tiles
 			SpriteUtils spriteUtil = new SpriteUtils(spritebatch.GraphicsDevice);
 			spriteUtil.Begin();
 			spriteUtil.FillRectangle(BoundingBox, Color.White);
-			spriteUtil.End();
 			switch (State)
 			{
 				case TileState.Front:
+					spritebatch.Draw(FrontTexture, );
 					break;
 				case TileState.Back:
+					spritebatch.Draw(BackTexture, );
 				default:
 					break;
 			}
+			spriteUtil.End();
 			base.Draw(spritebatch);
 		}
 		public void ChangeTileType(TileType type)

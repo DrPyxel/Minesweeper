@@ -54,7 +54,6 @@ namespace Minesweeper
             _makeBoardScreen = new MakeBoardScreen(Content, _spritebatch, _sceneManager, _gameScreen);
             _titleScreen = new TitleScreen(Content, _spritebatch, _sceneManager, _makeBoardScreen);
             _sceneManager.SetScene(_titleScreen);
-            //_sceneManager.GetCurrentScene().Load();
         }
 
         protected override void Update(GameTime gameTime)

@@ -22,6 +22,7 @@ namespace Minesweeper.Scenes
         GillSansText gillSansText;
         MakeBoardButton _makeBoardButton;
         GameBoardManager gameBoardManager;
+        BoardScreen _targetScene;
         int boardWidth;
         int boardHeight;
         List<BoardSizeButton> boardSizeButtons = new List<BoardSizeButton>();
@@ -70,7 +71,11 @@ namespace Minesweeper.Scenes
             AddButton(_makeBoardButton);
             base.Load();
         }
-
+        public override void Unload()
+        {
+            _targetScene.AddTiles(_tiles);
+            base.Unload();
+        }
         public void SetSize(int width, int height)
         {
             boardWidth = width;
@@ -82,8 +87,8 @@ namespace Minesweeper.Scenes
                 for (int j = 0; j < boardHeight; j++)
                 {
                     int xFactor = i - (boardWidth / 2);
-                    int yFactor = j - (boardWidth / 2);
-                    Vector2 buttonPos = new Vector2(275 * xFactor, 275 * yFactor);
+                    int yFactor = j - (boardHeight / 2);
+                    Vector2 buttonPos = new Vector2(55 * xFactor, 55 * yFactor);
 
                     Tile tile = new Tile(buttonPos, _tileFrontTexture, _tileBackTexture);
                     _tiles[i, j] = tile;

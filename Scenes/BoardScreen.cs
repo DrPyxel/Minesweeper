@@ -36,11 +36,16 @@ namespace Minesweeper.Scenes
             gillSansText.Draw(spritebatch, $"{_gameBoardManager.GetHeight()}x{_gameBoardManager.GetWidth()} Board", Game1.ScreenCenter + textDisplacement, Color.White, 4f, true);
             base.Draw(spritebatch);
         }
+
+        public void AddTiles(Tile[,] tileArr)
+        {
+            tiles = tileArr;
+        }
+
         public override void Load()
         {
             int boardWidth = _gameBoardManager.GetWidth();
             int boardHeight = _gameBoardManager.GetHeight();
-            tiles = _gameBoardManager._tiles;
 
             foreach (Tile tile in tiles)
             {
