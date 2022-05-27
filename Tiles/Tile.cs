@@ -39,10 +39,11 @@ namespace Minesweeper.Tiles
 			switch (State)
 			{
 				case TileState.Front:
-					spritebatch.Draw(FrontTexture, );
+					spritebatch.Draw(FrontTexture, BoundingBox, Color.White);
 					break;
 				case TileState.Back:
-					spritebatch.Draw(BackTexture, );
+					spritebatch.Draw(BackTexture, BoundingBox, Color.White);
+					break;
 				default:
 					break;
 			}

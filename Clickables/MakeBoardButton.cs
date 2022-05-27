@@ -16,13 +16,19 @@ namespace Minesweeper.Clickables
     class MakeBoardButton : TransitionButton
     {
         GameBoardManager _gameBoardManager;
+        SceneManager _sceneManager;
+        Scene _targetScene;
         public MakeBoardButton(Scene targetScene, SceneManager sceneManager, GameBoardManager gameBoardManager, Vector2 location, bool clickable = true) : base(targetScene, sceneManager, location, clickable)
         {
+            _targetScene = targetScene;
             _gameBoardManager = gameBoardManager;
+            _sceneManager = sceneManager;
         }
 
         public override void OnClick()
         {
+            _sceneManager.SetScene(_targetScene);
+            ChangeColor(Color.Black);
             base.OnClick();
         }
     }

@@ -19,34 +19,45 @@ namespace Minesweeper.Scenes
 {
     public class MakeBoardScreen : Scene
     {
+        const int BOARD_SIZE = 3;
+
         GillSansText gillSansText;
         MakeBoardButton _makeBoardButton;
         GameBoardManager gameBoardManager;
-        BoardScreen _targetScene;
         int boardWidth;
         int boardHeight;
         List<BoardSizeButton> boardSizeButtons = new List<BoardSizeButton>();
         Tile[,] _tiles = new Tile[0, 0];
         Texture2D _tileBackTexture, _tileFrontTexture, _mineFrontTexture;
-
+        bool lose;
         public MakeBoardScreen(ContentManager content, SpriteBatch spritebatch, SceneManager sceneManager, BoardScreen targetScene) : base(content, spritebatch)
         {
             gameBoardManager = new GameBoardManager(3, 3);
             gillSansText = new GillSansText(content, spritebatch);
-            for (int column = 0; column < 3; column++)
+            int numMines = BOARD_SIZE * BOARD_SIZE / 4;
+            for (int column = 0; column < BOARD_SIZE; column++)
             {
-                for (int row = 0; row < 3; row++)
+                for (int row = 0; row < BOARD_SIZE; row++)
                 {
-                    int xFactor = row - 1;
-                    int yFactor = column - 1;
-                    int value = row + (column * 3) + 3;
-                    Vector2 buttonPos = new Vector2(275 * xFactor, 275 * yFactor);
-                    BoardSizeButton boardSizeButton = new BoardSizeButton(value, buttonPos, gillSansText, this);
+                    int xFactor = row - BOARD_SIZE / 2;
+                    int yFactor = column - BOARD_SIZE / 2;
+                    bool isMine = false;
+                    Random random = new Random();
+                    if (numMines > 0 && random.NextDouble() < 0.25)
+                    {
+                        isMine = true;
+                        numMines--;
+                    }
+
+                    int BUTTON_SIZE = 375 - 20 * BOARD_SIZE;
+                    Vector2 buttonPos = new Vector2(BUTTON_SIZE * xFactor, BUTTON_SIZE * yFactor);
+                    BoardSizeButton boardSizeButton = new BoardSizeButton(isMine, buttonPos, gillSansText, this);
                     boardSizeButtons.Add(boardSizeButton);
                 }
             }
             targetScene._gameBoardManager = gameBoardManager;
-            _makeBoardButton = new MakeBoardButton(targetScene, sceneManager, gameBoardManager, new Vector2(0, 500f));
+            lose = false;
+            //_makeBoardButton = new MakeBoardButton(targetScene, sceneManager, gameBoardManager, new Vector2(0, 500f));
         }
 
         public void Initialize(ContentManager content)
@@ -55,11 +66,16 @@ namespace Minesweeper.Scenes
             _tileFrontTexture = content.Load<Texture2D>("blank");
             _mineFrontTexture = content.Load<Texture2D>("bomb");
         }
+        public override void Update(Vector2 clickpos)
+        {
 
+            base.Update(clickpos);
+        }
         public override void Draw(SpriteBatch spritebatch)
         {
-            Vector2 textDisplacement = new Vector2(0, -500f);
-            gillSansText.Draw(spritebatch, "Defender: Choose Board Size", Game1.ScreenCenter + textDisplacement, Color.White, 4f, true);
+            Vector2 textDisplacement = new Vector2(0, -700f);
+            string statusText = lose ? "You lose." : "";
+            gillSansText.Draw(spritebatch, statusText, Game1.ScreenCenter + textDisplacement, Color.White, 4f, true);
             base.Draw(spritebatch);
         }
         public override void Load()
@@ -68,42 +84,17 @@ namespace Minesweeper.Scenes
             {
                 AddButton(button);
             }
-            AddButton(_makeBoardButton);
+            //AddButton(_makeBoardButton);
             base.Load();
         }
         public override void Unload()
         {
-            _targetScene.AddTiles(_tiles);
             base.Unload();
         }
-        public void SetSize(int width, int height)
+
+        public void Lose()
         {
-            boardWidth = width;
-            boardHeight = height;
-
-            gameBoardManager = new GameBoardManager(width, height);
-            for (int i = 0; i < boardWidth; i++)
-            {
-                for (int j = 0; j < boardHeight; j++)
-                {
-                    int xFactor = i - (boardWidth / 2);
-                    int yFactor = j - (boardHeight / 2);
-                    Vector2 buttonPos = new Vector2(55 * xFactor, 55 * yFactor);
-
-                    Tile tile = new Tile(buttonPos, _tileFrontTexture, _tileBackTexture);
-                    _tiles[i, j] = tile;
-
-
-                    //float sWidth = Game1.ScreenCenter.X * 2;
-                    //float sHeight = Game1.ScreenCenter.Y * 2;
-                    //int xdistBetween = (int)sWidth / boardWidth;
-                    //int ydistBetween = (int)sHeight / boardHeight;
-                    //int xPos = (int)Game1.ScreenCenter.X + xdistBetween * (i - boardWidth / 2);
-                    //int yPos = (int)Game1.ScreenCenter.Y + ydistBetween * (j - boardHeight / 2);
-                    //Vector2 position = new Vector2(xPos, yPos);
-                }
-            }
-            gameBoardManager.Setup(_tiles);
+            lose = true;
         }
     }
 }

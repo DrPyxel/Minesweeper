@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System;
 
 namespace Minesweeper
 {
@@ -34,8 +35,9 @@ namespace Minesweeper
 
             while(numMines > 0)
             {
-                int mineX = Math.random() * boardWidth;
-                int mineY = Math.random() * boardHeight;
+                Random rand = new Random();
+                int mineX = rand.Next(boardWidth);
+                int mineY = rand.Next(boardHeight);
 
                 _tiles[mineX, mineY].ChangeTileType(TileType.Mine);
                 numMines--;

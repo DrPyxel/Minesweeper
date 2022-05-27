@@ -51,5 +51,10 @@ namespace Minesweeper.Clickables
             spriteUtil.End();
             base.Draw(spritebatch);
         }
+
+        public void ChangeColor(Color color)
+        {
+            this.color = color;
+        }
     }
 }
